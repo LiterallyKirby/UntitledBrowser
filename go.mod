@@ -1,4 +1,4 @@
-module Browser
+module browser
 
 go 1.25.3
 

@@ -1,3 +1,6 @@
+
+
+// browser.go
 package main
 
 import (
@@ -125,10 +128,17 @@ func (b *Browser) goHome() {
 }
 
 func (b *Browser) updateNavButtons() {
-	b.backBtn.Disabled = !b.history.CanGoBack()
-	b.forwardBtn.Disabled = !b.history.CanGoForward()
-	b.backBtn.Refresh()
-	b.forwardBtn.Refresh()
+	if b.history.CanGoBack() {
+		b.backBtn.Enable()
+	} else {
+		b.backBtn.Disable()
+	}
+	
+	if b.history.CanGoForward() {
+		b.forwardBtn.Enable()
+	} else {
+		b.forwardBtn.Disable()
+	}
 }
 
 func (b *Browser) onURLChange(url string) {
@@ -142,6 +152,4 @@ func (b *Browser) onLoadComplete(url string, err error) {
 		b.statusLabel.SetText("Loaded: " + url)
 	}
 }
-
-// history.go
 
